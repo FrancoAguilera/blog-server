@@ -1,20 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const Articles = require("../models/article.model.ts");
 
-router.get("/", async (req, res, next) => {
-  const allArticles = await Articles.find();
-  return res.status(200).json(allArticles);
-});
+const api = require("../controllers/articles.controller.ts");
 
-router.post("/", async (req, res, next) => {
-  const newArticle = new Articles({
-    title: "JS Array methods",
-    content: "HTML content for the article content related to array methods",
-    author: "Franco Aguilera",
-  });
-  const insertedArticle = await newArticle.save();
-  return res.status(201).json(insertedArticle);
-});
+router
+  .get("/", async (req, res) => api.getAllArticles(req, res))
+  .get("/:_id", async (req, res) => api.getArticleById(req, res))
+  .post("/", async (req, res) => api.createArticle(req, res))
+  .put("/:id", async (req, res) => api.updateArticle(req, res))
+  .delete("/:id", async (req, res) => api.deleteArticle(req, res));
 
 module.exports = router;
