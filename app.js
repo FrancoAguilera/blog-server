@@ -8,6 +8,9 @@ require("./bootstrap/bootstrap")(app);
 require("./bootstrap/routes")(app);
 require("./bootstrap/error")(app);
 
-app.listen(PORT, () => {
-  console.log(`Server running on port: ${PORT}`);
-});
+try {
+  app.listen(3000, () => console.log(`Server running on port: ${PORT}`));
+} catch (error) {
+  console.error(error);
+  process.exit(1);
+}
