@@ -3,7 +3,7 @@ const router = express.Router();
 
 /* GET root page. */
 router.get("/", (req, res, next) => {
-  res.json({ response: "root GET method" });
+  res.json({ response: "Endpoint active" });
 });
 
 module.exports = router;
